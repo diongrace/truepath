@@ -19,21 +19,21 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 4.0,
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/bac.jpeg'),
-            fit: BoxFit.cover,
-          ),
+         decoration: const BoxDecoration(
+           image: DecorationImage(
+             image: AssetImage('assets/images/ciel.jpeg'),
+           fit: BoxFit.cover,
         ),
+         ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Icon(
-                Icons.book,
-                size: 100,
-                color: Colors.white.withOpacity(0.8),
-              ),
+              // Icon(
+              //   Icons.book,
+              //   size: 100,
+              //   color: Colors.white.withOpacity(0.8),
+              // ),
               const SizedBox(height: 20),
               Text(
                 'Bienvenue dans notre jeu de la Bible !',
@@ -52,15 +52,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DashboardScreen(userName: '',),
-                    ),
-                  );
-                },
+             ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DashboardScreen(userName: ''),
+                  ),
+                );
+              },
                 child: const Text('Commencer'),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,

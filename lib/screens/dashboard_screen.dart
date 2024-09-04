@@ -72,28 +72,28 @@ class DashboardScreen extends StatelessWidget {
                       'Histoires',
                       Icons.book,
                       Colors.blueAccent,
-                      HistoiresScreen(), // Page de destination pour "Histoires"
+                      HistoiresScreen(), 
                     ),
                     _buildDashboardButton(
                       context,
                       'Étude Biblique',
                       Icons.menu_book,
                       Colors.greenAccent,
-                      EtudeBibliqueScreen(), // Page de destination pour "Étude Biblique"
+                      EtudeBibliqueScreen(), 
                     ),
                     _buildDashboardButton(
                       context,
                       'Vidéo Biblique',
                       Icons.video_library,
                       Colors.orangeAccent,
-                      VideoBibliqueScreen(), // Créez une instance de la classe VideoBibliqueScreen
+                      VideoBibliqueScreen(), 
                     ),
                     _buildDashboardButton(
                       context,
                       'Quiz',
                       Icons.quiz,
                       Colors.redAccent,
-                      QuizScreen(), // Page de destination pour "Quiz"
+                      QuizScreen(), 
                     ),
                   ],
                 ),
