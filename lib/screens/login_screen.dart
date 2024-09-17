@@ -66,7 +66,7 @@ class LoginScreen extends StatelessWidget {
                     // Rediriger vers HomeScreen après la connexion
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -92,7 +92,7 @@ class LoginScreen extends StatelessWidget {
                     // Rediriger vers la page d'inscription
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const SignUpScreen()),
+                      MaterialPageRoute(builder: (context) =>  SignUpScreen()),
                     );
                   },
                   child: const Text(

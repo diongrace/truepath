@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => const HomeScreen(),
         '/splash': (context) => const SplashScreen(),
-        '/signup': (context) => const SignUpScreen(),
+        '/signup': (context) =>  SignUpScreen(),
         '/dashboard': (context) => const DashboardScreen(userName: ''),
           '/histoires': (context) => HistoiresScreen(),
         '/etude_biblique': (context) => EtudeBibliqueScreen(),

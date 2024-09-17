@@ -15,7 +15,7 @@ class DashboardScreen extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF512DA8), Color(0xFFD1C4E9)], // Dégradé de couleurs
+            colors: [Color(0xFF512DA8), Color(0xFFD1C4E9)], 
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
