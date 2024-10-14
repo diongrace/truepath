@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'signup_screen.dart';
+import 'package:truepath/screens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,8 +22,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
 
     _controller.forward();
-
-    _navigateToSignUp();
+    _navigateToLogin();
   }
 
   @override
@@ -32,11 +31,11 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     super.dispose();
   }
 
-  _navigateToSignUp() async {
-    await Future.delayed(const Duration(seconds: 10), () {});
+  _navigateToLogin() async {
+    await Future.delayed(const Duration(seconds: 5), () {});
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) =>  SignUpScreen()),
+      MaterialPageRoute(builder: (context) =>LoginPage()),
     );
   }
 
@@ -46,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF512DA8), Color(0xFFD1C4E9)], // Dégradé de couleurs
+            colors: [Color(0xFF6A1B9A), Color(0xFFD1C4E9)], // Dégradé de couleurs modernisé
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -58,15 +57,15 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               FadeTransition(
                 opacity: _animation,
                 child: Image.asset(
-                  'assets/images/dd.png', // Assure-toi que l'image du logo est bien placée dans les assets
-                  width: 150,
-                  height: 150,
+                  'assets/images/dd.png', // Logo de l'application
+                  width: 120,
+                  height: 120,
                 ),
               ),
               const SizedBox(height: 20),
               const CircularProgressIndicator(
                 color: Colors.white, // Couleur du ProgressIndicator
-                strokeWidth: 3.0,   // Épaisseur de l'indicateur
+                strokeWidth: 3.0,
               ),
               const SizedBox(height: 40),
               const Padding(
@@ -81,11 +80,20 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                     shadows: [
                       Shadow(
                         blurRadius: 10.0,
-                        color: Colors.black26,
+                        color: Colors.black38,
                         offset: Offset(2.0, 2.0),
                       ),
                     ],
                   ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Chargement...',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
