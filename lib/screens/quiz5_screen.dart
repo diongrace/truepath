@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:truepath/screens/quiz3_screen.dart';
 
-
-class QuizPage extends StatefulWidget {
+class QuizPage5 extends StatefulWidget {
   @override
-  _QuizPageState createState() => _QuizPageState();
+  _QuizPage5State createState() => _QuizPage5State();
 }
 
-class _QuizPageState extends State<QuizPage> with SingleTickerProviderStateMixin {
+class _QuizPage5State extends State<QuizPage5> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   int _currentQuestionIndex = 0;
@@ -15,16 +14,22 @@ class _QuizPageState extends State<QuizPage> with SingleTickerProviderStateMixin
 
   // Questions, réponses et réponses correctes pour le quiz sur l'Apocalypse
   final List<String> _questions = [
-"Qui a construit l'arche?",
-    "Où est né Jésus?",
-    "Combien de disciples Jésus avait-il?",
+   "Qui a conduit les Israélites hors d'Égypte?",
+      "Quel miracle Moïse a-t-il accompli au bord de la Mer Rouge?",
+      "Combien de plaques de malédiction ont été infligées à l'Égypte?",
+      "Où Moïse a-t-il reçu les Dix Commandements?",
+      "Quel est le nom du frère de Moïse?",
   ];
+
   final List<List<String>> _answers = [
-    ["Moïse", "Noé", "Abraham", "Jacob"],
-    ["Nazareth", "Bethléem", "Jérusalem", "Capernaüm"],
-    ["12", "10", "8", "14"]
+    ["Moïse", "Aaron", "David", "Abraham"],
+      ["Partir les eaux", "Faire pleuvoir", "Ressusciter un mort", "Changer l'eau en sang"],
+      ["10", "5", "7", "12"],
+      ["Mont Sinaï", "Mont Ararat", "Mont Nebo", "Mont Horeb"],
+      ["Aaron", "Joseph", "Caleb", "Élie"],
   ];
-  List<int> _correctAnswers = [1, 1, 0];
+
+  List<int> _correctAnswers = [0, 0, 1, 0, 0]; // Index des bonnes réponses
 
   @override
   void initState() {
@@ -77,7 +82,7 @@ class _QuizPageState extends State<QuizPage> with SingleTickerProviderStateMixin
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.purple.shade800,
-          padding: const EdgeInsets.symmetric(vertical: 15),
+          padding: EdgeInsets.symmetric(vertical: 15),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -85,12 +90,12 @@ class _QuizPageState extends State<QuizPage> with SingleTickerProviderStateMixin
         onPressed: () {
           if (index == _correctAnswers[_currentQuestionIndex]) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Bonne réponse!')),
+              SnackBar(content: Text('Bonne réponse!')),
             );
             _score++;
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: const Text('Mauvaise réponse!')),
+              SnackBar(content: Text('Mauvaise réponse!')),
             );
           }
           _nextQuestion();

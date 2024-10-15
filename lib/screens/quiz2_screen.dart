@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:truepath/screens/quiz3_screen.dart';
 
 
-class QuizPage extends StatefulWidget {
+class QuizPage2 extends StatefulWidget {
   @override
-  _QuizPageState createState() => _QuizPageState();
+  _QuizPage2State createState() => _QuizPage2State();
 }
 
-class _QuizPageState extends State<QuizPage> with SingleTickerProviderStateMixin {
+class _QuizPage2State extends State<QuizPage2> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   int _currentQuestionIndex = 0;
@@ -15,16 +15,20 @@ class _QuizPageState extends State<QuizPage> with SingleTickerProviderStateMixin
 
   // Questions, réponses et réponses correctes pour le quiz sur l'Apocalypse
   final List<String> _questions = [
-"Qui a construit l'arche?",
-    "Où est né Jésus?",
-    "Combien de disciples Jésus avait-il?",
+ "Quel est le nom de la mère de Jésus?",
+      "Quel miracle Jésus a-t-il accompli lors de son premier miracle?",
+      "Quel était le métier de Jésus avant son ministère?",
+      "Quel disciple a trahi Jésus?",
+      "Combien de jours Jésus a-t-il jeûné dans le désert?",
   ];
   final List<List<String>> _answers = [
-    ["Moïse", "Noé", "Abraham", "Jacob"],
-    ["Nazareth", "Bethléem", "Jérusalem", "Capernaüm"],
-    ["12", "10", "8", "14"]
+       ["Marie", "Élisabeth", "Martha", "Sara"],
+      ["Transformer l'eau en vin", "Guérir un aveugle", "Marcher sur l'eau", "Multiplication des pains"],
+      ["Charpentier", "Pêcheur", "Maçon", "Agriculteur"],
+      ["Judas", "Pierre", "Jean", "Thomas"],
+      ["30", "40", "20", "10"],
   ];
-  List<int> _correctAnswers = [1, 1, 0];
+  final List<int> _correctAnswers = [0, 0, 0, 0, 1];
 
   @override
   void initState() {
@@ -90,7 +94,7 @@ class _QuizPageState extends State<QuizPage> with SingleTickerProviderStateMixin
             _score++;
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: const Text('Mauvaise réponse!')),
+              const SnackBar(content: Text('Mauvaise réponse!')),
             );
           }
           _nextQuestion();
