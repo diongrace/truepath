@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:truepath/screens/correspond/MatchingGame_Screen.dart';
+import 'package:truepath/screens/memoirequiz/memory_game_screen.dart';
+import 'package:truepath/screens/puzzle/puzzle_selection_screen.dart';
 
 class GamesPage extends StatelessWidget {
   @override
@@ -17,7 +20,7 @@ class GamesPage extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/background.jpg'), // Ajoutez votre image de fond ici
+            image: AssetImage('assets/images/bac.jpeg'), // Ajoutez votre image de fond ici
             fit: BoxFit.cover,
           ),
         ),
@@ -33,33 +36,45 @@ class GamesPage extends StatelessWidget {
                 title: 'Quiz Biblique',
                 icon: Icons.quiz,
                 onTap: () {
-                  Navigator.pushNamed(context, '/quiz');
+                  Navigator.pushNamed(context, '/quizintro'); // Naviguer vers la page d'introduction du quiz
                 },
               ),
+           _buildGameCard(
+              context,
+              title: 'Puzzle Biblique',
+              icon: Icons.extension,
+              onTap: () {
+                // Naviguer vers le jeu de puzzle
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PuzzleSelectionScreen()), // Remplacez par votre écran de jeu
+                );
+              },
+            ),
               _buildGameCard(
-                context,
-                title: 'Puzzle Biblique',
-                icon: Icons.extension,
-                onTap: () {
-                  // Naviguer vers le jeu de puzzle
-                },
-              ),
+              context,
+              title: 'Jeu de correspondance',
+              icon: Icons.memory,
+              onTap: () {
+                // Naviguer vers le jeu de mémoire
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MatchingGameScreen()),
+                );
+              },
+            ),
               _buildGameCard(
-                context,
-                title: 'Jeu de correspondance',
-                icon: Icons.compare_arrows,
-                onTap: () {
-                  // Naviguer vers le jeu de correspondance
-                },
-              ),
-              _buildGameCard(
-                context,
-                title: 'Jeu de mémoire',
-                icon: Icons.memory,
-                onTap: () {
-                  // Naviguer vers le jeu de mémoire
-                },
-              ),
+              context,
+              title: 'Jeu de mémoire',
+              icon: Icons.memory,
+              onTap: () {
+                // Naviguer vers le jeu de mémoire
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
+            ),
             ],
           ),
         ),

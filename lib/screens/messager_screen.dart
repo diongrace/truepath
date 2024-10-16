@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:truepath/screens/quiz2_screen.dart';
-import 'package:truepath/screens/quiz3_screen.dart';
-import 'package:truepath/screens/quiz4_screen.dart';
-import 'package:truepath/screens/quiz5_screen.dart'; // Importez les autres écrans de quiz ici
+import 'package:truepath/screens/quiz/quiz1_screen.dart';
+import 'package:truepath/screens/quiz/quiz2_screen.dart';
+import 'package:truepath/screens/quiz/quiz3_screen.dart';
+import 'package:truepath/screens/quiz/quiz4_screen.dart';
+import 'package:truepath/screens/quiz/quiz5_screen.dart'; // Importez les autres écrans de quiz ici
 
 class QuizSuccessPage extends StatelessWidget {
   final int score;
@@ -21,7 +22,7 @@ class QuizSuccessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Résultat du Quiz'),
+        title: const Text('Résultat du Quiz'),
         backgroundColor: Colors.purple.shade800,
       ),
       body: Center(
@@ -36,16 +37,16 @@ class QuizSuccessPage extends StatelessWidget {
                 color: Colors.green,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
-              'Votre score: $score/${3}', // Mettez ici le nombre total de questions
+              'Votre score: $score/$totalQuizzes', // Affichage dynamique du nombre total de questions
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w500,
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context); // Retour à la page précédente
@@ -66,30 +67,31 @@ class QuizSuccessPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        switch (currentQuizIndex) {
+                        switch (currentQuizIndex) { // Utiliser currentQuizIndex sans décalage
                           case 0:
-                            return QuizPage2(); // Redirection vers le quiz 2
+                            return QuizPage1(); 
                           case 1:
-                            return QuizPage3(); // Redirection vers le quiz 3
+                            return QuizPage2(); 
                           case 2:
-                            return QuizPage4(); // Redirection vers le quiz 4
+                            return QuizPage3(); 
                           case 3:
-                            return QuizPage5(); // Redirection vers le quiz 5
-                          // Ajoutez d'autres cas si nécessaire
+                            return QuizPage4(); 
+                          case 4:
+                            return QuizPage5(); 
                           default:
-                            return QuizPage5(); // Retournez au premier quiz par défaut
+                            return QuizPage1(); // S'il y a un problème, renvoie au premier quiz
                         }
                       },
                     ),
                   );
                 } else {
-                  // Si c'est le dernier quiz, peut-être montrer un message ou rediriger vers une page finale
+                  // Si c'est le dernier quiz, afficher un message
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Vous avez terminé tous les quiz!")),
                   );
                 }
               },
-              child: Text('Continuer à jouer'),
+              child: const Text('Continuer à jouer'),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 backgroundColor: Colors.greenAccent,

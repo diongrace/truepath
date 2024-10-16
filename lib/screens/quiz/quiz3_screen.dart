@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:truepath/screens/quiz3_screen.dart';
+import 'package:truepath/screens/messager_screen.dart';
 
-
-class QuizPage extends StatefulWidget {
+class QuizPage3 extends StatefulWidget {
   @override
-  _QuizPageState createState() => _QuizPageState();
+  _QuizPage3State createState() => _QuizPage3State();
 }
 
-class _QuizPageState extends State<QuizPage> with SingleTickerProviderStateMixin {
+class _QuizPage3State extends State<QuizPage3> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   int _currentQuestionIndex = 0;
   int _score = 0;
 
-  // Questions, réponses et réponses correctes pour le quiz sur l'Apocalypse
   final List<String> _questions = [
-"Qui a construit l'arche?",
-    "Où est né Jésus?",
-    "Combien de disciples Jésus avait-il?",
+    "Combien d'Évangiles y a-t-il dans le Nouveau Testament?",
+    "Quel Évangile commence par 'Au commencement était la Parole'?",
+    "Qui a écrit l'Évangile selon Luc?",
+    "Quel est l'Évangile le plus court?",
+    "Dans quel Évangile trouve-t-on le Sermon sur la Montagne?",
   ];
+
   final List<List<String>> _answers = [
-    ["Moïse", "Noé", "Abraham", "Jacob"],
-    ["Nazareth", "Bethléem", "Jérusalem", "Capernaüm"],
-    ["12", "10", "8", "14"]
+    ["4", "5", "3", "6"],
+    ["Jean", "Matthieu", "Marc", "Luc"],
+    ["Luc", "Jean", "Matthieu", "Marc"],
+    ["Marc", "Luc", "Matthieu", "Jean"],
+    ["Matthieu", "Marc", "Luc", "Jean"],
   ];
-  List<int> _correctAnswers = [1, 1, 0];
+
+  final List<int> _correctAnswers = [0, 1, 0, 0, 0]; // Indices des bonnes réponses
 
   @override
   void initState() {
@@ -54,7 +58,12 @@ class _QuizPageState extends State<QuizPage> with SingleTickerProviderStateMixin
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => QuizSuccessPage(score: _score, onPlayAgain: _resetQuiz),
+          builder: (context) => QuizSuccessPage(
+            score: _score,
+            onPlayAgain: _resetQuiz,
+            totalQuizzes: 5, // Indiquez le nombre total de quizzes
+            currentQuizIndex: 2, // Indiquez l'index du quiz actuel
+          ),
         ),
       );
     }
@@ -64,7 +73,7 @@ class _QuizPageState extends State<QuizPage> with SingleTickerProviderStateMixin
     if (mounted) {
       setState(() {
         _currentQuestionIndex = 0;
-        _score = 0;
+        _score = 0; // Réinitialiser le score
       });
       _controller.reset();
       _controller.forward();
@@ -90,10 +99,10 @@ class _QuizPageState extends State<QuizPage> with SingleTickerProviderStateMixin
             _score++;
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: const Text('Mauvaise réponse!')),
+              const SnackBar(content: Text('Mauvaise réponse!')),
             );
           }
-          _nextQuestion();
+          _nextQuestion(); // Passe à la question suivante ou termine le quiz
         },
         child: Text(
           text,

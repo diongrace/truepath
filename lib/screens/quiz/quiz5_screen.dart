@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:truepath/screens/quiz3_screen.dart';
+import 'package:truepath/screens/messager_screen.dart';
 
 class QuizPage5 extends StatefulWidget {
   @override
@@ -12,24 +12,25 @@ class _QuizPage5State extends State<QuizPage5> with SingleTickerProviderStateMix
   int _currentQuestionIndex = 0;
   int _score = 0;
 
-  // Questions, réponses et réponses correctes pour le quiz sur l'Apocalypse
+  // Questions, réponses et réponses correctes pour le quiz sur les miracles de Jésus
   final List<String> _questions = [
-   "Qui a conduit les Israélites hors d'Égypte?",
-      "Quel miracle Moïse a-t-il accompli au bord de la Mer Rouge?",
-      "Combien de plaques de malédiction ont été infligées à l'Égypte?",
-      "Où Moïse a-t-il reçu les Dix Commandements?",
-      "Quel est le nom du frère de Moïse?",
+    "Quel miracle Jésus a-t-il accompli en premier?",
+    "Combien de pains Jésus a-t-il utilisés pour nourrir 5000 personnes?",
+    "Quel était le nom de la ville où Jésus a transformé l'eau en vin?",
+    "Qui a été ressuscité par Jésus après avoir été mort pendant quatre jours?",
+    "Quel miracle a permis à un aveugle de retrouver la vue?",
   ];
 
   final List<List<String>> _answers = [
-    ["Moïse", "Aaron", "David", "Abraham"],
-      ["Partir les eaux", "Faire pleuvoir", "Ressusciter un mort", "Changer l'eau en sang"],
-      ["10", "5", "7", "12"],
-      ["Mont Sinaï", "Mont Ararat", "Mont Nebo", "Mont Horeb"],
-      ["Aaron", "Joseph", "Caleb", "Élie"],
+    ["Transformer l'eau en vin", "Ressusciter Lazare", "Marcher sur l'eau", "Guérir un aveugle"],
+    ["3 pains", "5 pains", "7 pains", "2 pains"],
+    ["Nazareth", "Cana", "Bethléem", "Jérusalem"],
+    ["Pierre", "Lazare", "Jairus", "Élie"],
+    ["Guérison de l'aveugle de Jéricho", "Guérison de l'aveugle né", "Guérison de l'aveugle de Bethsaïda", "Aucune de ces réponses"],
   ];
 
-  List<int> _correctAnswers = [0, 0, 1, 0, 0]; // Index des bonnes réponses
+  // Indices des bonnes réponses
+  final List<int> _correctAnswers = [0, 1, 1, 1, 1]; // Corrigé : tous les indices sont mis à jour pour correspondre aux bonnes réponses
 
   @override
   void initState() {
@@ -59,7 +60,12 @@ class _QuizPage5State extends State<QuizPage5> with SingleTickerProviderStateMix
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => QuizSuccessPage(score: _score, onPlayAgain: _resetQuiz),
+          builder: (context) => QuizSuccessPage(
+            score: _score,
+            onPlayAgain: _resetQuiz,
+            totalQuizzes: 5, // Nombre total de quizzes
+            currentQuizIndex: 5, // Index du quiz actuel
+          ),
         ),
       );
     }
@@ -82,7 +88,7 @@ class _QuizPage5State extends State<QuizPage5> with SingleTickerProviderStateMix
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.purple.shade800,
-          padding: EdgeInsets.symmetric(vertical: 15),
+          padding: const EdgeInsets.symmetric(vertical: 15),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -90,12 +96,12 @@ class _QuizPage5State extends State<QuizPage5> with SingleTickerProviderStateMix
         onPressed: () {
           if (index == _correctAnswers[_currentQuestionIndex]) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Bonne réponse!')),
+              const SnackBar(content: Text('Bonne réponse!')),
             );
             _score++;
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Mauvaise réponse!')),
+              const SnackBar(content: Text('Mauvaise réponse!')),
             );
           }
           _nextQuestion();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:truepath/screens/quiz3_screen.dart';
+import 'package:truepath/screens/messager_screen.dart';
 
 class QuizPage4 extends StatefulWidget {
   @override
@@ -14,22 +14,22 @@ class _QuizPage4State extends State<QuizPage4> with SingleTickerProviderStateMix
 
   // Questions, réponses et réponses correctes pour le quiz sur l'Apocalypse
   final List<String> _questions = [
-   "Qui a conduit les Israélites hors d'Égypte?",
-      "Quel miracle Moïse a-t-il accompli au bord de la Mer Rouge?",
-      "Combien de plaques de malédiction ont été infligées à l'Égypte?",
-      "Où Moïse a-t-il reçu les Dix Commandements?",
-      "Quel est le nom du frère de Moïse?",
+    "Qui a conduit les Israélites hors d'Égypte?",
+    "Quel miracle Moïse a-t-il accompli au bord de la Mer Rouge?",
+    "Combien de plaques de malédiction ont été infligées à l'Égypte?",
+    "Où Moïse a-t-il reçu les Dix Commandements?",
+    "Quel est le nom du frère de Moïse?",
   ];
 
   final List<List<String>> _answers = [
     ["Moïse", "Aaron", "David", "Abraham"],
-      ["Partir les eaux", "Faire pleuvoir", "Ressusciter un mort", "Changer l'eau en sang"],
-      ["10", "5", "7", "12"],
-      ["Mont Sinaï", "Mont Ararat", "Mont Nebo", "Mont Horeb"],
-      ["Aaron", "Joseph", "Caleb", "Élie"],
+    ["Partir les eaux", "Faire pleuvoir", "Ressusciter un mort", "Changer l'eau en sang"],
+    ["10", "5", "7", "12"],
+    ["Mont Sinaï", "Mont Ararat", "Mont Nebo", "Mont Horeb"],
+    ["Aaron", "Joseph", "Caleb", "Élie"],
   ];
 
-  List<int> _correctAnswers = [0, 0, 1, 0, 0]; // Index des bonnes réponses
+  final List<int> _correctAnswers = [0, 0, 1, 0, 0]; // Index des bonnes réponses
 
   @override
   void initState() {
@@ -59,7 +59,12 @@ class _QuizPage4State extends State<QuizPage4> with SingleTickerProviderStateMix
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => QuizSuccessPage(score: _score, onPlayAgain: _resetQuiz),
+          builder: (context) => QuizSuccessPage(
+            score: _score,
+            onPlayAgain: _resetQuiz,
+            totalQuizzes: 5, // Indiquer le nombre total de quizzes
+            currentQuizIndex: 4, // Indiquer l'index du quiz actuel
+          ),
         ),
       );
     }
@@ -82,7 +87,7 @@ class _QuizPage4State extends State<QuizPage4> with SingleTickerProviderStateMix
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.purple.shade800,
-          padding: EdgeInsets.symmetric(vertical: 15),
+          padding: const EdgeInsets.symmetric(vertical: 15),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -90,12 +95,12 @@ class _QuizPage4State extends State<QuizPage4> with SingleTickerProviderStateMix
         onPressed: () {
           if (index == _correctAnswers[_currentQuestionIndex]) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Bonne réponse!')),
+              const SnackBar(content: Text('Bonne réponse!')),
             );
             _score++;
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Mauvaise réponse!')),
+              const SnackBar(content: Text('Mauvaise réponse!')),
             );
           }
           _nextQuestion();

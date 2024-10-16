@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:truepath/screens/quiz3_screen.dart';
-
+import 'package:truepath/screens/messager_screen.dart';
 
 class QuizPage2 extends StatefulWidget {
   @override
@@ -13,21 +12,23 @@ class _QuizPage2State extends State<QuizPage2> with SingleTickerProviderStateMix
   int _currentQuestionIndex = 0;
   int _score = 0;
 
-  // Questions, réponses et réponses correctes pour le quiz sur l'Apocalypse
+  // Questions, réponses et réponses correctes pour le quiz
   final List<String> _questions = [
- "Quel est le nom de la mère de Jésus?",
-      "Quel miracle Jésus a-t-il accompli lors de son premier miracle?",
-      "Quel était le métier de Jésus avant son ministère?",
-      "Quel disciple a trahi Jésus?",
-      "Combien de jours Jésus a-t-il jeûné dans le désert?",
+    "Quel est le nom de la mère de Jésus?",
+    "Quel miracle Jésus a-t-il accompli lors de son premier miracle?",
+    "Quel était le métier de Jésus avant son ministère?",
+    "Quel disciple a trahi Jésus?",
+    "Combien de jours Jésus a-t-il jeûné dans le désert?",
   ];
+
   final List<List<String>> _answers = [
-       ["Marie", "Élisabeth", "Martha", "Sara"],
-      ["Transformer l'eau en vin", "Guérir un aveugle", "Marcher sur l'eau", "Multiplication des pains"],
-      ["Charpentier", "Pêcheur", "Maçon", "Agriculteur"],
-      ["Judas", "Pierre", "Jean", "Thomas"],
-      ["30", "40", "20", "10"],
+    ["Marie", "Élisabeth", "Martha", "Sara"],
+    ["Transformer l'eau en vin", "Guérir un aveugle", "Marcher sur l'eau", "Multiplication des pains"],
+    ["Charpentier", "Pêcheur", "Maçon", "Agriculteur"],
+    ["Judas", "Pierre", "Jean", "Thomas"],
+    ["30", "40", "20", "10"],
   ];
+
   final List<int> _correctAnswers = [0, 0, 0, 0, 1];
 
   @override
@@ -58,7 +59,12 @@ class _QuizPage2State extends State<QuizPage2> with SingleTickerProviderStateMix
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => QuizSuccessPage(score: _score, onPlayAgain: _resetQuiz),
+          builder: (context) => QuizSuccessPage(
+            score: _score,
+            onPlayAgain: _resetQuiz,
+            totalQuizzes: 5, // Le nombre total de quiz dans l'application
+            currentQuizIndex: 2, // L'index du quiz actuel, ici quiz 2
+          ),
         ),
       );
     }
