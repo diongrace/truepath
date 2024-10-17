@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:truepath/screens/puzzle/PuzzleGame_Screen.dart';
+import 'package:truepath/screens/puzzle/SlidingPuzzleGame_screen.dart';
 
 class Puzzle {
   final String title;
@@ -19,7 +20,7 @@ final List<Puzzle> puzzles = [
   Puzzle(
     title: 'Puzzle 2',
     icon: Icons.gamepad, // Changement ici
-    screen: PuzzleGameScreen(), // Remplacez par un autre écran de jeu
+    screen: SlidingPuzzleGame(), // Remplacez par un autre écran de jeu
   ),
   // Ajoutez d'autres puzzles ici
 ];
