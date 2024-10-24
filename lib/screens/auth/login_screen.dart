@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:truepath/services/user_api_service.dart'; 
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  final ApiService apiService = ApiService(); // Instance de ApiService
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // Ajout d'une image de fond
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/moise.jpeg'), // Assurez-vous d'avoir une image ici
-            fit: BoxFit.cover, // Remplir tout l'espace
+            image: AssetImage('assets/images/moise.jpeg'), 
+            fit: BoxFit.cover,
           ),
         ),
         padding: const EdgeInsets.all(24.0),
@@ -21,20 +23,18 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo ou Titre de l'application
                 Icon(
                   Icons.account_circle,
                   size: 100,
-                  color: Colors.purple.shade800, // Icône violet
+                  color: Colors.purple.shade800,
                 ),
                 const SizedBox(height: 20),
-                // Titre de la page
                 const Text(
                   'Connexion',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white, // Texte blanc
+                    color: Colors.white,
                     shadows: [
                       Shadow(
                         blurRadius: 10.0,
@@ -47,92 +47,40 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 40),
 
                 // Champ Email
-                Container(
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255).withOpacity(0.8), // Fond semi-transparent
-                    borderRadius: BorderRadius.circular(20.0), // Coins plus arrondis
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black26,
-                        offset: Offset(0, 4), // Ombre sous le champ
-                        blurRadius: 8,
-                      ),
-                    ],
-                  ),
-                  child: TextField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Color.fromARGB(253, 250, 250, 250), // Transparent car déjà coloré avec le Container
-                      labelText: 'Email',
-                      labelStyle: TextStyle(color: Colors.purple.shade800), // Label violet
-                      prefixIcon: Icon(Icons.email, color: Colors.purple.shade800),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.purple.shade800, width: 2.0),
-                        borderRadius: BorderRadius.circular(20.0), // Coins arrondis
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0), // Coins arrondis
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20), // Ajout de padding
-                    ),
-                  ),
+                _buildTextField(
+                  controller: _emailController,
+                  label: 'Email',
+                  prefixIcon: Icons.email,
+                  keyboardType: TextInputType.emailAddress, // Type de clavier pour email
                 ),
                 const SizedBox(height: 20),
 
                 // Champ Mot de passe
-                Container(
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 246, 244, 244).withOpacity(0.8), // Fond semi-transparent
-                    borderRadius: BorderRadius.circular(20.0), // Coins plus arrondis
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color.fromARGB(255, 252, 251, 251),
-                        offset: Offset(0, 4), // Ombre sous le champ
-                        blurRadius: 8,
-                      ),
-                    ],
-                  ),
-                  child: TextField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.transparent, // Transparent car déjà coloré avec le Container
-                      labelText: 'Mot de passe',
-                      labelStyle: TextStyle(color: Colors.purple.shade800), // Label violet
-                      prefixIcon: Icon(Icons.lock, color: Colors.purple.shade800),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.purple.shade800, width: 2.0),
-                        borderRadius: BorderRadius.circular(20.0), // Coins arrondis
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0), // Coins arrondis
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20), // Ajout de padding
-                    ),
-                    obscureText: true, // Masquer le texte
-                  ),
+                _buildTextField(
+                  controller: _passwordController,
+                  label: 'Mot de passe',
+                  prefixIcon: Icons.lock,
+                  obscureText: true, // Masque le mot de passe
                 ),
                 const SizedBox(height: 30),
 
                 // Bouton de Connexion
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple.shade800, // Couleur violette du bouton
+                    backgroundColor: Colors.purple.shade800,
                     padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 100),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onPressed: () {
-                    // Logique de connexion ici
-                    Navigator.pushReplacementNamed(context, '/dashboard');
+                  onPressed: () async {
+                    await _loginUser(context);
                   },
                   child: const Text(
                     'Se connecter',
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.white, // Texte blanc sur bouton violet
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -146,7 +94,7 @@ class LoginPage extends StatelessWidget {
                   child: const Text(
                     'Créer un compte',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 249, 249, 249), // Texte blanc
+                      color: Color.fromARGB(255, 249, 249, 249),
                       fontSize: 26,
                       shadows: [
                         Shadow(
@@ -164,5 +112,79 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required IconData prefixIcon,
+    bool obscureText = false,
+    TextInputType keyboardType = TextInputType.text,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(20.0),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            offset: Offset(0, 4),
+            blurRadius: 8,
+          ),
+        ],
+      ),
+      child: TextField(
+        controller: controller,
+        obscureText: obscureText,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.transparent,
+          labelText: label,
+          labelStyle: TextStyle(color: Colors.purple.shade800),
+          prefixIcon: Icon(prefixIcon, color: Colors.purple.shade800),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.purple.shade800, width: 2.0),
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _loginUser(BuildContext context) async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    // Vérifiez si les champs sont vides
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Veuillez remplir tous les champs")),
+      );
+      return;
+    }
+
+    // Appeler le service de connexion
+    try {
+      bool result = await apiService.login(email, password);
+      if (result) {
+        // Connexion réussie, redirigez vers le dashboard
+        Navigator.pushReplacementNamed(context, '/dashboard');
+      } else {
+        // Affichez un message d'erreur
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Erreur de connexion")),
+        );
+      }
+    } catch (e) {
+      // Gérer l'erreur d'inscription
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Erreur lors de la connexion: $e")),
+      );
+    }
   }
 }
