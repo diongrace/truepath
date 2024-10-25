@@ -31,25 +31,28 @@ class ApiService {
 
  // Fonction pour connecter un utilisateur
 Future<bool> login(String email, String password) async {
-  final response = await http.post(
-    Uri.parse(ApiEndpoint.connexionUser),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode({
-      'email': email,
-      'password': password,
-    }),
-  );
+    try {
+      // Appel à votre API pour se connecter
+      final response = await http.post(
+        Uri.parse(ApiEndpoint.connexionUser),
+        body: {
+          'email': email,
+          'password': password,
+        },
+      );
 
-  if (response.statusCode == 200) {
-    // Connexion réussie, vous pouvez également traiter la réponse ici si nécessaire
-    return true;  // Connexion réussie
-  } else {
-    // En cas d'erreur, vous pouvez afficher les détails ou gérer les erreurs
-    print('Erreur lors de la connexion: ${response.body}');
-    return false; // Connexion échouée
+      if (response.statusCode == 200) {
+        // Si la connexion est réussie
+        return true;
+      } else {
+        // Si la connexion échoue, vous pouvez renvoyer false ou lever une exception
+        return false;
+      }
+    } catch (e) {
+      // Gérer les exceptions ici
+      print("Erreur lors de la connexion: $e");
+      throw e; // Relève l'erreur pour pouvoir la gérer plus haut
+    }
   }
-}
 
 }

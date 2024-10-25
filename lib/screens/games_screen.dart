@@ -20,7 +20,7 @@ class GamesPage extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/bac.jpeg'), // Ajoutez votre image de fond ici
+            image: AssetImage('assets/images/bac.jpeg'), 
             fit: BoxFit.cover,
           ),
         ),
@@ -36,7 +36,7 @@ class GamesPage extends StatelessWidget {
                 title: 'Quiz Biblique',
                 icon: Icons.quiz,
                 onTap: () {
-                  Navigator.pushNamed(context, '/quizintro'); // Naviguer vers la page d'introduction du quiz
+                  Navigator.pushNamed(context, '/quizintro'); 
                 },
               ),
            _buildGameCard(
@@ -47,7 +47,7 @@ class GamesPage extends StatelessWidget {
                 // Naviguer vers le jeu de puzzle
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PuzzleSelectionScreen()), // Remplacez par votre écran de jeu
+                  MaterialPageRoute(builder: (context) => PuzzleSelectionScreen()),
                 );
               },
             ),
