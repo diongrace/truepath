@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                     // Bouton pour réinitialiser le mot de passe
                     TextButton(
                       onPressed: () {
-                        // Logique pour la réinitialisation du mot de passe
+                        Navigator.pushNamed(context, '/password');
                       },
                       child: const Text(
                         'Mot de passe oublié?',

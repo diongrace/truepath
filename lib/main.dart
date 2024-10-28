@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:truepath/screens/auth/password_screen.dart';
 import 'package:truepath/screens/correspond/MatchingGame_Screen.dart';
 import 'package:truepath/screens/dashboard_screen.dart';
 import 'package:truepath/screens/games_screen.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/splash': (context) => const SplashScreen(),
         '/login': (context) => LoginPage(),
         '/signup': (context) => SignupPage(),
+        '/password': (context) => ForgotPasswordScreen(),
         '/dashboard': (context) => DashboardHomePage(),
         '/games': (context) => GamesPage(),
         '/quiz1': (context) => QuizPage1(),
