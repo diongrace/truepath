@@ -5,6 +5,7 @@ import 'package:truepath/screens/dashboard_screen.dart';
 import 'package:truepath/screens/games_screen.dart';
 import 'package:truepath/screens/auth/login_screen.dart';
 import 'package:truepath/screens/memoirequiz/MemoryGame_Screen.dart';
+import 'package:truepath/screens/memoirequiz/memory_game_animals_screen.dart';
 import 'package:truepath/screens/memoirequiz/memory_game_screen.dart';
 import 'package:truepath/screens/messager_screen.dart';
 import 'package:truepath/screens/puzzle/PuzzleGame_Screen.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
         '/MemoryGame': (context) => MemoryGameScreen(),
         '/MatchingGame': (context) => MatchingGameScreen(),
         '/SlidingPuzzleGame': (context) => SlidingPuzzleGame(),
+        '/MemoryGameAnimals': (context) => MemoryGameAnimalsScreen(),
         '/messager': (context) => QuizSuccessPage(score: 10, onPlayAgain: () {  }, totalQuizzes: 5, currentQuizIndex: 5,), 
       },
     );
