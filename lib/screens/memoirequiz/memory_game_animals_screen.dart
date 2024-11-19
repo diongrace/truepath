@@ -121,8 +121,8 @@ void flipCard(int index) async {
               decoration: BoxDecoration(
                 color: cardMatched[index] ? Colors.green : Colors.white,  // Colorie la carte appariée en vert
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  const BoxShadow(
+                boxShadow: const [
+                  BoxShadow(
                     color: Colors.black26,
                     blurRadius: 8,
                     offset: Offset(0, 4),
