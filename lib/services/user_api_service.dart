@@ -21,10 +21,14 @@ class ApiService {
         'message': 'Inscription réussie',
       };
     } else {
-      print('Erreur lors de l\'inscription: ${response.body}');
+      // L'API Laravel renvoie {"status": false, "message": "..."} : on n'affiche que le message
+      String message = "L'inscription a échoué";
+      try {
+        message = jsonDecode(response.body)['message'].toString();
+      } catch (_) {}
       return {
         'success': false,
-        'message': response.body,
+        'message': message,
       };
     }
   }

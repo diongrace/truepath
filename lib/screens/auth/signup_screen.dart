@@ -209,13 +209,18 @@ class _SignupPageState extends State<SignupPage> {
           Navigator.pushReplacementNamed(context, '/login'); // Redirect to login page
         });
       } else {
-        _showDialog(context, "Erreur lors de l'inscription: ${result['message']}", "Erreur", Colors.red);
+        _showDialog(context, "${result['message']}", "Erreur", Colors.red);
       }
     } catch (e) {
       setState(() {
         _isLoading = false; // Stop loading on error
       });
-      _showDialog(context, "Erreur lors de l'inscription: $e", "Erreur", Colors.red);
+      _showDialog(
+        context,
+        "Le serveur est injoignable. Retournez à la connexion et utilisez « Essayer sans compte » pour découvrir l'application.",
+        "Erreur",
+        Colors.red,
+      );
     }
   }
 
