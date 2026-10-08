@@ -7,7 +7,7 @@ class PasswordResetService {
 Future<bool> forgotPassword(String email) async {
   try {
     final response = await http.post(
-      Uri.parse(ApiEndpoint.passwordForgot),
+      ApiEndpoint.parse(ApiEndpoint.passwordForgot),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -32,7 +32,7 @@ Future<bool> forgotPassword(String email) async {
   Future<bool> resetPassword(String email, String password, String token) async {
     try {
       final response = await http.post(
-        Uri.parse(ApiEndpoint.passwordReset),
+        ApiEndpoint.parse(ApiEndpoint.passwordReset),
         headers: {
           'Content-Type': 'application/json',
         },

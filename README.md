@@ -57,7 +57,13 @@ flutter run            # sur un émulateur ou un téléphone
 flutter run -d chrome  # dans le navigateur
 ```
 
-Pour utiliser la vraie connexion, lancez l'[API Laravel](https://github.com/diongrace/API-LARAVEL) (`php artisan serve`) et adaptez l'adresse dans `lib/services/utils/api_endpoint.dart`. Sans serveur, utilisez **« Essayer sans compte »**.
+Pour utiliser la vraie connexion, lancez l'[API Laravel](https://github.com/diongrace/API-LARAVEL) (`php artisan serve`) et passez son adresse au build :
+
+```bash
+flutter run --dart-define=API_URL=http://192.168.X.X:8000
+```
+
+Par défaut, l'émulateur Android utilise `http://10.0.2.2:8000`, et la version web n'appelle aucune API. Sans serveur, utilisez **« Essayer sans compte »**.
 
 Lancer les tests :
 

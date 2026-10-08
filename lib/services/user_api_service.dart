@@ -8,7 +8,7 @@ class ApiService {
   // Fonction pour s'inscrire
    Future<Map<String, dynamic>> signUp(User user) async {
     final response = await http.post(
-      Uri.parse(ApiEndpoint.inscriptionUser),
+      ApiEndpoint.parse(ApiEndpoint.inscriptionUser),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -38,7 +38,7 @@ Future<bool> login(String email, String password) async {
     try {
       // Appel à votre API pour se connecter
       final response = await http.post(
-        Uri.parse(ApiEndpoint.connexionUser),
+        ApiEndpoint.parse(ApiEndpoint.connexionUser),
         body: {
           'email': email,
           'password': password,
