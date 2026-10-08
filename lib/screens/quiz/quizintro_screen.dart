@@ -66,11 +66,11 @@ class QuizIntroPage extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
                     decoration: BoxDecoration(
-                      color: Colors.greenAccent,
+                      color: Colors.amber,
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.green.withOpacity(0.5),
+                          color: Colors.amber.withOpacity(0.5),
                           offset: Offset(0, 4),
                           blurRadius: 10,
                         ),

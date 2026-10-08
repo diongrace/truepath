@@ -158,7 +158,7 @@ class _QuizPage3State extends State<QuizPage3> with SingleTickerProviderStateMix
                 child: LinearProgressIndicator(
                   value: (_currentQuestionIndex + 1) / _questions.length,
                   backgroundColor: Colors.white.withOpacity(0.5),
-                  color: Colors.greenAccent,
+                  color: Colors.amber,
                 ),
               ),
             ],

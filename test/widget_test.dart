@@ -1,30 +1,37 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:truepath/main.dart';
+import 'package:truepath/screens/puzzle/PuzzleGame_Screen.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  Future<void> pumpPuzzle(WidgetTester tester, int size) async {
+    await tester.binding.setSurfaceSize(const Size(600, 900));
+    await tester.pumpWidget(MaterialApp(
+      home: PuzzleGameScreen(
+        title: 'Test',
+        image: 'assets/images/puzzle_2.png',
+        size: size,
+      ),
+    ));
+  }
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('Le puzzle 3x3 affiche 8 pièces et 0 coup au départ', (tester) async {
+    await pumpPuzzle(tester, 3);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    expect(find.text('Coups : 0'), findsOneWidget);
+    expect(find.byType(AnimatedPositioned), findsNWidgets(8));
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('Toucher une pièce voisine de la case vide compte un coup', (tester) async {
+    await pumpPuzzle(tester, 4);
+
+    // Exactement 2 à 4 pièces sont voisines de la case vide : une seule tape suffit
+    for (final piece in find.byType(AnimatedPositioned).evaluate().toList()) {
+      await tester.tap(find.byWidget(piece.widget), warnIfMissed: false);
+      await tester.pumpAndSettle();
+      if (find.text('Coups : 1').evaluate().isNotEmpty) break;
+    }
+
+    expect(find.text('Coups : 1'), findsOneWidget);
   });
 }

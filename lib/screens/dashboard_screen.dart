@@ -10,16 +10,16 @@ class DashboardHomePage extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 22,
-            color: Color.fromARGB(255, 80, 224, 44),
+            color: Colors.white,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 153, 2, 246),
+        backgroundColor: Colors.purple.shade800,
         actions: [
           TextButton.icon(
             onPressed: () => _confirmLogout(context),
             icon: const Icon(
               Icons.logout,
-              color: Color.fromARGB(255, 3, 243, 3),
+              color: Colors.white,
             ),
             label: const Text(
               'Déconnexion',
@@ -62,7 +62,7 @@ class DashboardHomePage extends StatelessWidget {
             const Icon(
               Icons.videogame_asset,
               size: 100,
-              color: Color.fromARGB(255, 8, 222, 18), // Couleur contrastée
+              color: Colors.amber,
             ),
             const SizedBox(height: 20),
             // Texte de bienvenue
@@ -82,7 +82,7 @@ class DashboardHomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/games');
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 166, 0, 255),
+                backgroundColor: Colors.purple.shade800,
                 padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -100,13 +100,13 @@ class DashboardHomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Ajout d'un bouton pour d'autres fonctionnalités
+            // Bouton vers les histoires bibliques
             ElevatedButton(
               onPressed: () {
-                // Naviguer vers une autre page ou effectuer une action
+                Navigator.pushNamed(context, '/histoires');
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 255, 193, 7), // Couleur contrastée
+                backgroundColor: Colors.amber,
                 padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -115,7 +115,7 @@ class DashboardHomePage extends StatelessWidget {
                 elevation: 5,
               ),
               child: const Text(
-                'Autres fonctionnalités',
+                'Histoires bibliques',
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.black,

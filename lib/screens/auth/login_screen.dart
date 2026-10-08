@@ -152,6 +152,26 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 10),
+
+                    // Mode démo : accès aux jeux sans le serveur Laravel
+                    OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.white, width: 1.5),
+                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, '/dashboard');
+                      },
+                      icon: const Icon(Icons.play_arrow, color: Colors.white),
+                      label: const Text(
+                        'Essayer sans compte',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -224,10 +244,6 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    print("Envoi à l'API :");
-    print("Email: $email");
-    print("Mot de passe: $password");
-
     setState(() {
       _isLoading = true; // Démarrer le chargement
     });
@@ -245,14 +261,18 @@ class _LoginPageState extends State<LoginPage> {
         _showDialog(context, "Connexion réussie", "Succès");
       } else {
         // Affichez un message d'erreur
-        _showDialog(context, "Erreur de connexion", "Erreur");
+        _showDialog(context, "Email ou mot de passe incorrect", "Erreur");
       }
     } catch (e) {
       setState(() {
         _isLoading = false; // Arrêter le chargement en cas d'erreur
       });
       // Gérer l'erreur d'inscription
-      _showDialog(context, "Erreur lors de la connexion: $e", "Erreur");
+      _showDialog(
+        context,
+        "Le serveur est injoignable. Utilisez « Essayer sans compte » pour découvrir l'application.",
+        "Erreur",
+      );
     }
   }
 

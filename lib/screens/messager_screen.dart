@@ -140,7 +140,7 @@ class QuizSuccessPage extends StatelessWidget {
                 child: const Text('Continuer à jouer'),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 30),
-                  backgroundColor: Colors.greenAccent,
+                  backgroundColor: Colors.amber,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
